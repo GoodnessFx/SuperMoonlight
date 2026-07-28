@@ -33,48 +33,54 @@ const BRAND = "Super Moonlight Logistics";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 type NavPage = "home" | "about" | "products" | "services" | "contact";
-type AllPage = NavPage | "product-detail" | "quote" | "cookie-policy";
+type AllPage = NavPage | "quote" | "cookie-policy";
 
 // ─── Images ──────────────────────────────────────────────────────────────────
 // Removed unused logo constant
 
-// ─── Product Data (Curated Logistics Gallery) ──────────────────────────────────
-const PRODUCTS = [
+// ─── Gallery: Real Logistics Operations ─────────────────────────────────────
+const GALLERY = [
   {
-    id: "product-01",
+    id: "gallery-01",
     image: "https://images.pexels.com/videos/3840442/aerial-barge-boat-business-3840442.jpeg?auto=compress&cs=tinysrgb&h=1080&fit=crop&w=1920",
-    imageAlt: "Super Moonlight Logistics - Cargo Shipping",
-    caption: "Sea Freight Operations",
+    imageAlt: "Cargo ships at sea carrying shipping containers",
+    title: "Ocean Freight",
+    desc: "We manage full-container and consolidated sea shipments from major global ports — including Guangzhou, Shanghai, and Qingdao — directly to Apapa and Tin Can Island ports in Lagos.",
   },
   {
-    id: "product-02",
+    id: "gallery-02",
+    image: "https://images.pexels.com/photos/187041/pexels-photo-187041.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    imageAlt: "Cargo plane on tarmac loading freight",
+    title: "Air Freight",
+    desc: "For time-critical shipments, our air freight service ensures your goods move fast — from origin airport to your Lagos warehouse with speed and full tracking visibility.",
+  },
+  {
+    id: "gallery-03",
+    image: "https://images.pexels.com/photos/906494/pexels-photo-906494.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    imageAlt: "Shipping containers stacked at container terminal",
+    title: "Cargo Consolidation",
+    desc: "Not enough goods for a full container? No problem. We consolidate your cargo with other shipments (LCL) so you only pay for the space your goods actually occupy.",
+  },
+  {
+    id: "gallery-04",
+    image: "https://images.pexels.com/photos/1427107/pexels-photo-1427107.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    imageAlt: "Customs officers checking cargo documents at port",
+    title: "Customs Clearance",
+    desc: "Our licensed customs agents handle all documentation, HS code classification, duty payments, and liaison with Nigeria Customs Service — ensuring fast, compliant release of your goods.",
+  },
+  {
+    id: "gallery-05",
+    image: "https://images.pexels.com/photos/1267338/pexels-photo-1267338.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    imageAlt: "Workers in warehouse organising goods on shelves",
+    title: "Warehouse & Storage",
+    desc: "Our Trade Fair Complex warehouse provides secure, climate-appropriate storage for your goods before onward distribution. Full inventory management included.",
+  },
+  {
+    id: "gallery-06",
     image: "https://images.pexels.com/photos/14005602/pexels-photo-14005602.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    imageAlt: "Super Moonlight Logistics - Air Freight",
-    caption: "Global Cargo Transport",
-  },
-  {
-    id: "product-03",
-    image: "https://images.pexels.com/videos/6010721/4-k-video-aerial-drone-radio-6010721.jpeg?auto=compress&cs=tinysrgb&h=1080&fit=crop&w=1920",
-    imageAlt: "Super Moonlight Logistics - Logistics Hub",
-    caption: "Logistics Hub Management",
-  },
-  {
-    id: "product-04",
-    image: "https://images.pexels.com/videos/3840442/aerial-barge-boat-business-3840442.jpeg?auto=compress&cs=tinysrgb&h=1080&fit=crop&w=1920",
-    imageAlt: "Super Moonlight Logistics - Container Yard",
-    caption: "Container Logistics",
-  },
-  {
-    id: "product-05",
-    image: "https://images.pexels.com/videos/6010721/4-k-video-aerial-drone-radio-6010721.jpeg?auto=compress&cs=tinysrgb&h=1080&fit=crop&w=1920",
-    imageAlt: "Super Moonlight Logistics - Delivery",
-    caption: "Last Mile Delivery",
-  },
-  {
-    id: "product-06",
-    image: "https://images.pexels.com/photos/14005602/pexels-photo-14005602.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    imageAlt: "Super Moonlight Logistics - Highway Trucking",
-    caption: "Interstate Haulage",
+    imageAlt: "Delivery truck on highway for last-mile logistics",
+    title: "Door-to-Door Delivery",
+    desc: "From our Lagos depots, we move your cargo directly to your business location across Lagos and beyond — handling haulage, offloading, and delivery confirmation.",
   },
 ];
 
@@ -111,7 +117,7 @@ const SERVICES = [
 const NAV_LINKS: { label: string; page: NavPage }[] = [
   { label: "Home", page: "home" },
   { label: "About", page: "about" },
-  { label: "Products", page: "products" },
+  { label: "Gallery", page: "products" },
   { label: "Services", page: "services" },
   { label: "Contact", page: "contact" },
 ];
@@ -553,10 +559,9 @@ function HeroSlideshow() {
 // ─── HOME PAGE ────────────────────────────────────────────────────────────────
 function HomePage({
   navigate,
-  onSelectProduct,
 }: {
   navigate: (p: AllPage) => void;
-  onSelectProduct: (product: (typeof PRODUCTS)[number]) => void;
+  onSelectProduct?: (product: unknown) => void;
 }) {
   return (
     <main>
@@ -620,10 +625,10 @@ function HomePage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x divide-[#E8E9EB]">
             {[
-              { value: "7", label: "Core Services" },
-              { value: "99+", label: "Product Photos" },
+              { value: "6+", label: "Core Services" },
+              { value: "2018", label: "Founded" },
               { value: "24/7", label: "Availability" },
-              { value: "Lagos", label: "Based in Ikoyi" },
+              { value: "Lagos", label: "HQ Mandilas" },
             ].map((item) => (
               <div key={item.label} className="lg:px-8 first:lg:pl-0 last:lg:pr-0">
                 <div className="font-display text-[#1B4F8C] text-2xl font-bold">{item.value}</div>
@@ -669,48 +674,42 @@ function HomePage({
         </div>
       </section>
 
-      {/* Products Gallery */}
+      {/* Operations Gallery */}
       <section className="bg-white py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
-              <SectionLabel text="Our Operations" />
+              <SectionLabel text="What We Do" />
               <h2 className="font-display text-[#0A1628] text-3xl sm:text-4xl font-bold">
-                Logistics Gallery
+                Our Operations
               </h2>
             </div>
             <button
               onClick={() => navigate("products")}
               className="flex items-center gap-1.5 text-[#0A1628] text-sm font-semibold hover:text-[#1B4F8C] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1B4F8C] rounded-sm shrink-0"
             >
-              View all photos <ArrowRight size={14} />
+              View all operations <ArrowRight size={14} />
             </button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {PRODUCTS.slice(0, 6).map((product) => (
-              <button
-                key={product.id}
-                onClick={() => {
-                  onSelectProduct(product);
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                  navigate("product-detail");
-                }}
-                className="group text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1B4F8C] rounded overflow-hidden"
+            {GALLERY.slice(0, 6).map((item) => (
+              <div
+                key={item.id}
+                className="group rounded overflow-hidden border border-[#E8E9EB] bg-[#F8F9FA] hover:border-[#1B4F8C]/30 transition-colors"
               >
                 <div className="relative overflow-hidden rounded bg-[#E8E9EB] aspect-[4/3]">
                   <img
-                    src={product.image}
-                    alt={product.imageAlt}
+                    src={item.image}
+                    alt={item.imageAlt}
+                    loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0A1628]/80 to-transparent p-4">
-                    <span className="text-white text-sm font-semibold">
-                      {product.caption}
-                    </span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628]/70 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <span className="text-white text-sm font-bold">{item.title}</span>
                   </div>
                 </div>
-              </button>
+              </div>
             ))}
           </div>
         </div>
@@ -940,111 +939,56 @@ function AboutPage({ navigate }: { navigate: (p: AllPage) => void }) {
   );
 }
 
-// ─── PRODUCTS PAGE ────────────────────────────────────────────────────────────
-function ProductsPage({
-  navigate,
-  onSelectProduct,
-}: {
-  navigate: (p: AllPage) => void;
-  onSelectProduct: (product: (typeof PRODUCTS)[number]) => void;
-}) {
+// ─── GALLERY PAGE ─────────────────────────────────────────────────────────────
+function GalleryPage({ navigate }: { navigate: (p: AllPage) => void }) {
   return (
     <main className="pt-16">
       <PageHero
-        label="Our Operations"
-        title="Logistics Gallery"
-        image="https://images.pexels.com/photos/14005602/pexels-photo-14005602.jpeg?auto=compress&cs=tinysrgb&w=1600"
-        imageAlt="Freight and logistics operations"
+        label="What We Do"
+        title="Our Operations"
+        image="https://images.pexels.com/videos/3840442/aerial-barge-boat-business-3840442.jpeg?auto=compress&cs=tinysrgb&h=1080&fit=crop&w=1920"
+        imageAlt="Freight and logistics operations at sea"
       />
 
       <section className="bg-white py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <p className="text-[#64748B] text-base max-w-2xl mb-12 leading-relaxed">
-            Take a look at our day-to-day operations. From container loading and customs clearance
-            to warehouse management and local delivery, we ensure your cargo is handled with
-            the utmost care at every step of the journey.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {PRODUCTS.map((product) => (
-              <button
-                key={product.id}
-                onClick={() => {
-                  onSelectProduct(product);
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                  navigate("product-detail");
-                }}
-                className="group text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1B4F8C] rounded bg-[#F2F3F6] overflow-hidden border border-[#E8E9EB] hover:border-[#1B4F8C]/25 transition-colors"
+          <div className="max-w-2xl mb-12">
+            <SectionLabel text="End-to-End Freight" />
+            <p className="text-[#64748B] text-base leading-relaxed">
+              From the moment your order leaves the factory floor in China to the moment it arrives
+              at your Lagos warehouse, Super Moonlight Logistics manages every step. Here is a
+              look at what we do for you.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {GALLERY.map((item) => (
+              <div
+                key={item.id}
+                className="group rounded overflow-hidden border border-[#E8E9EB] bg-[#F8F9FA] hover:border-[#1B4F8C]/30 transition-colors"
               >
                 <div className="relative overflow-hidden aspect-[16/9] bg-[#E8E9EB]">
                   <img
-                    src={product.image}
-                    alt={product.imageAlt}
+                    src={item.image}
+                    alt={item.imageAlt}
+                    loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628]/60 to-transparent" />
+                  <span className="absolute bottom-3 left-4 text-white text-sm font-bold tracking-wide">
+                    {item.title}
+                  </span>
                 </div>
-                <div className="p-6">
-                  <h2 className="font-display text-[#0A1628] text-lg font-bold mb-2">
-                    {product.caption}
-                  </h2>
-                  <div className="flex items-center gap-1.5 text-[#0A1628] text-sm font-semibold group-hover:text-[#1B4F8C] transition-colors">
-                    View photo <ArrowRight size={14} />
-                  </div>
+                <div className="p-5">
+                  <p className="text-[#64748B] text-sm leading-relaxed">{item.desc}</p>
+                  <button
+                    onClick={() => navigate("contact")}
+                    className="mt-4 text-[#1B4F8C] text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all"
+                  >
+                    Get a Quote <ArrowRight size={13} />
+                  </button>
                 </div>
-              </button>
+              </div>
             ))}
-          </div>
-        </div>
-      </section>
-    </main>
-  );
-}
-
-// ─── PRODUCT DETAIL PAGE ──────────────────────────────────────────────────────
-function ProductDetailPage({
-  product,
-  navigate,
-}: {
-  product: (typeof PRODUCTS)[number];
-  navigate: (p: AllPage) => void;
-}) {
-  const p = product;
-
-  return (
-    <main className="pt-16">
-      <div className="bg-white border-b border-[#E8E9EB]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
-          <button
-            onClick={() => navigate("products")}
-            className="flex items-center gap-1.5 text-[#64748B] text-sm hover:text-[#0A1628] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1B4F8C] rounded-sm"
-          >
-            <ChevronRight size={14} className="rotate-180" />
-            Back to Products
-          </button>
-        </div>
-      </div>
-
-      <section className="bg-white py-12 sm:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="rounded overflow-hidden bg-[#E8E9EB] aspect-square">
-              <img
-                src={p.image}
-                alt={p.imageAlt}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div>
-              <h1 className="font-display text-[#0A1628] text-3xl sm:text-4xl font-bold mb-4">
-                {p.caption}
-              </h1>
-
-              <button
-                onClick={() => navigate("contact")}
-                className="w-full bg-[#1B4F8C] text-white font-semibold px-6 py-3.5 rounded hover:bg-[#153f73] transition-colors flex items-center justify-center gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#0A1628]"
-              >
-                Contact Us About This Product <ArrowRight size={16} />
-              </button>
-            </div>
           </div>
         </div>
       </section>
@@ -1488,7 +1432,6 @@ function ContactPage() {
   // ─── APP ──────────────────────────────────────────────────────────────────────
   export default function App() {
     const [page, setPage] = useState<AllPage>("home");
-    const [selectedProduct, setSelectedProduct] = useState<(typeof PRODUCTS)[number]>(PRODUCTS[0]);
     const [analyticsConsent, setAnalyticsConsent] = useState<"accepted" | "rejected" | null>(null);
 
     useEffect(() => {
@@ -1517,16 +1460,9 @@ function ContactPage() {
     return (
       <div className="min-h-screen bg-background text-foreground">
         <Nav currentPage={page} navigate={navigate} />
-        {page === "home" && (
-          <HomePage navigate={navigate} onSelectProduct={setSelectedProduct} />
-        )}
+        {page === "home" && <HomePage navigate={navigate} onSelectProduct={() => {}} />}
         {page === "about" && <AboutPage navigate={navigate} />}
-        {page === "products" && (
-          <ProductsPage navigate={navigate} onSelectProduct={setSelectedProduct} />
-        )}
-        {page === "product-detail" && (
-          <ProductDetailPage product={selectedProduct} navigate={navigate} />
-        )}
+        {page === "products" && <GalleryPage navigate={navigate} />}
         {page === "services" && <ServicesPage navigate={navigate} />}
         {page === "contact" && <ContactPage />}
         {page === "cookie-policy" && <CookiePolicyPage />}
