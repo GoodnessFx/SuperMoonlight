@@ -611,8 +611,8 @@ function HomePage({
           const isActive = idx === currentHeroIndex;
           const isPrev = idx === prevHeroIndex;
           let visibilityClass = "opacity-0 z-0";
-          if (isActive) visibilityClass = "opacity-100 z-20";
-          else if (isPrev) visibilityClass = "opacity-100 z-10";
+          if (isActive) visibilityClass = "opacity-100 z-[2]";
+          else if (isPrev) visibilityClass = "opacity-100 z-[1]";
 
           return (
             <div
@@ -641,8 +641,8 @@ function HomePage({
             </div>
           );
         })}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/60 to-transparent" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-10 sm:pb-16 lg:pb-20 w-full">
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/60 to-transparent z-10" />
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 pb-10 sm:pb-16 lg:pb-20 w-full">
           <div className="max-w-2xl">
             <SectionLabel text="Lagos Island · Mandilas" />
             <h1 className="font-display text-white text-3xl sm:text-5xl lg:text-[4.5rem] font-bold leading-[1.05] sm:leading-[1.02] mb-4 sm:mb-6 tracking-tight">
