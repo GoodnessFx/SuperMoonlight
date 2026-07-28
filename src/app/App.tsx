@@ -556,6 +556,34 @@ function HeroSlideshow() {
   );
 }
 
+// ─── HOME PAGE HERO CAROUSEL DATA ───────────────────────────────────────────────
+const HERO_CAROUSEL_MEDIA = [
+  {
+    type: "video",
+    src: "https://videos.pexels.com/video-files/3840442/3840442-hd_1920_1080_30fps.mp4",
+    poster: "https://images.pexels.com/videos/3840442/aerial-barge-boat-business-3840442.jpeg?auto=compress&cs=tinysrgb&h=1080&fit=crop&w=1920",
+    alt: "Cargo Ship at Port"
+  },
+  {
+    type: "video",
+    src: "https://videos.pexels.com/video-files/2811059/2811059-hd_1920_1080_30fps.mp4",
+    poster: "https://images.pexels.com/photos/14005602/pexels-photo-14005602.jpeg?auto=compress&cs=tinysrgb&w=1920",
+    alt: "Cargo Truck on Highway"
+  },
+  {
+    type: "video",
+    src: "https://videos.pexels.com/video-files/6010721/6010721-hd_1920_1080_30fps.mp4",
+    poster: "https://images.pexels.com/videos/6010721/4-k-video-aerial-drone-radio-6010721.jpeg?auto=compress&cs=tinysrgb&h=1080&fit=crop&w=1920",
+    alt: "Logistics Hub Aerial"
+  },
+  {
+    type: "video",
+    src: "https://videos.pexels.com/video-files/6129188/6129188-hd_1920_1080_30fps.mp4",
+    poster: "https://images.pexels.com/photos/906494/pexels-photo-906494.jpeg?auto=compress&cs=tinysrgb&w=1920",
+    alt: "Container Terminal"
+  }
+];
+
 // ─── HOME PAGE ────────────────────────────────────────────────────────────────
 function HomePage({
   navigate,
@@ -563,22 +591,56 @@ function HomePage({
   navigate: (p: AllPage) => void;
   onSelectProduct?: (product: unknown) => void;
 }) {
+  const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
+  const [prevHeroIndex, setPrevHeroIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPrevHeroIndex(currentHeroIndex);
+      setCurrentHeroIndex((prev) => (prev + 1) % HERO_CAROUSEL_MEDIA.length);
+    }, 8000); // Rotate every 8 seconds
+    return () => clearInterval(interval);
+  }, [currentHeroIndex]);
+
   return (
     <main>
       {/* Hero */}
       <section className="relative h-[85vh] sm:h-[92vh] min-h-[420px] sm:min-h-[560px] max-h-[900px] flex items-end overflow-hidden bg-[#0A1628]">
-        <video 
-          autoPlay 
-          muted 
-          loop 
-          playsInline 
-          poster="https://images.pexels.com/videos/3840442/aerial-barge-boat-business-3840442.jpeg?auto=compress&cs=tinysrgb&h=1080&fit=crop&w=1920"
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="https://videos.pexels.com/video-files/3840442/3840442-uhd_2560_1440_30fps.mp4" type="video/mp4" media="(min-width: 1920px)" />
-          <source src="https://videos.pexels.com/video-files/3840442/3840442-hd_1920_1080_30fps.mp4" type="video/mp4" />
-          <img src="https://images.pexels.com/videos/3840442/aerial-barge-boat-business-3840442.jpeg?auto=compress&cs=tinysrgb&h=1080&fit=crop&w=1920" alt="Super Moonlight Logistics Cargo Ship" className="absolute inset-0 w-full h-full object-cover" />
-        </video>
+        {/* Background Carousel */}
+        {HERO_CAROUSEL_MEDIA.map((media, idx) => {
+          const isActive = idx === currentHeroIndex;
+          const isPrev = idx === prevHeroIndex;
+          let visibilityClass = "opacity-0 z-0";
+          if (isActive) visibilityClass = "opacity-100 z-20";
+          else if (isPrev) visibilityClass = "opacity-100 z-10";
+
+          return (
+            <div
+              key={idx}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-[1500ms] ease-in-out ${visibilityClass}`}
+            >
+              {media.type === "video" ? (
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster={media.poster}
+                  className="w-full h-full object-cover"
+                >
+                  <source src={media.src} type="video/mp4" />
+                  <img src={media.poster} alt={media.alt} className="w-full h-full object-cover" />
+                </video>
+              ) : (
+                <img
+                  src={media.src}
+                  alt={media.alt}
+                  className="w-full h-full object-cover"
+                />
+              )}
+            </div>
+          );
+        })}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/60 to-transparent" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-10 sm:pb-16 lg:pb-20 w-full">
           <div className="max-w-2xl">
